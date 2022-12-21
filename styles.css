@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#selections,
+#points {
+  display: flex;
+  gap: 50px;
+  background-color: gray;
+}
+#selections {
+  height: 40vh;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.selection {
+  height: 100px;
+  width: 200px;
+  font-size: x-large;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: white;
+}
+.selection:hover {
+  background-color: rgb(22, 22, 107);
+  color: white;
+}
+#resultContainer {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(22, 22, 107);
+}
+#result {
+  font-size: 40px;
+  color: white;
+}
+#points {
+  height: 40vh;
+  justify-content: center;
+  align-items: flex-start;
+}
+h3 {
+  color: aquamarine;
+  padding-top: 100px;
+  font-size: xx-large;
+  text-shadow: 2px 2px 2px darkslategray;
+}
+body {
+  background-color: gray;
+}

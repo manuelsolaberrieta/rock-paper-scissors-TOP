@@ -60,10 +60,10 @@ function calculatePoints(pP, cP) {
   if (pP < 5 && cP < 5) {
     return;
   } else {
-    showMessage(pP, cP);
+    defineWinner(pP, cP);
   }
 }
-function showMessage(pP, cP) {
+function defineWinner(pP, cP) {
   let msg = "";
   if (pP > cP) {
     msg = `You win the game ${pP} to ${cP}!`;
@@ -72,13 +72,16 @@ function showMessage(pP, cP) {
   } else {
     msg = `You tie the game ${cP} to ${pP}!`;
   }
+  showMessage(msg);
+}
+function showMessage(msg) {
   const winner = document.createElement("h1");
   winner.textContent = msg;
-  const col = document.getElementsByClassName("game");
-  for (let i = 0; i < col.length; i++) {
-    col[i].style.display = "none";
+  const gameTags = document.getElementsByClassName("game");
+  for (let i = 0; i < gameTags.length; i++) {
+    gameTags[i].style.display = "none";
   }
-  document.getElementById("fin").appendChild(winner);
+  document.getElementById("result").textContent = msg;
 }
 const selectionButtons = document.querySelectorAll(".selection");
 selectionButtons.forEach((element) => {
