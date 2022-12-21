@@ -1,71 +1,69 @@
-const choices = ["rock", "paper", "scissors"];
 function getComputerChoice() {
+  const choices = ["rock", "paper", "scissors"];
   return choices[Math.floor(Math.random() * 3)];
 }
-function getPlayerChoice() {
-  let playerChoice = prompt("Rock, Paper or Scissors?").toLowerCase();
-  return playerChoice;
-}
+const playerPointsTag = document.querySelector("#player-points");
+const PCPointsTag = document.querySelector("#pc-points");
+const tiesTag = document.querySelector("#ties");
+const resultTag = document.querySelector("#result");
 
 function playRound(playerChoice, computerChoice) {
+  let playerPoints = parseInt(playerPointsTag.textContent);
+  let computerPoints = parseInt(PCPointsTag.textContent);
+  let ties = parseInt(tiesTag.textContent);
   if (playerChoice == "rock") {
     if (computerChoice == "rock") {
-      return "It's a tie!";
+      resultTag.textContent = "It's a tie!";
+      tiesTag.textContent = `${(ties += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     } else if (computerChoice == "paper") {
-      return "You lose! Paper beats Rock";
+      resultTag.textContent = "You lose! Paper beats Rock";
+      PCPointsTag.textContent = `${(computerPoints += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     } else {
-      return "You win! Rock beats Scissors";
+      resultTag.textContent = "You win! Rock beats Scissors";
+      playerPointsTag.textContent = `${(playerPoints += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     }
   } else if (playerChoice == "paper") {
     if (computerChoice == "paper") {
-      return "It's a tie!";
+      resultTag.textContent = "It's a tie!";
+      tiesTag.textContent = `${(ties += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     } else if (computerChoice == "rock") {
-      return "You win! Paper beats Rock";
+      resultTag.textContent = "You win! Paper beats Rock";
+      playerPointsTag.textContent = `${(playerPoints += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     } else {
-      return "You lose! Scissors beats Paper";
+      resultTag.textContent = "You lose! Scissors beats Paper";
+      PCPointsTag.textContent = `${(computerPoints += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     }
   } else if (playerChoice == "scissors") {
     if (computerChoice == "scissors") {
-      return "It's a tie!";
+      resultTag.textContent = "It's a tie!";
+      tiesTag.textContent = `${(ties += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     } else if (computerChoice == "rock") {
-      return "You lose! Rock beats Scissors";
+      resultTag.textContent = "You lose! Rock beats Scissors";
+      PCPointsTag.textContent = `${(computerPoints += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     } else {
-      return "You win! Scissors beats Paper";
+      resultTag.textContent = "You win! Scissors beats Paper";
+      playerPointsTag.textContent = `${(playerPoints += 1)}`;
+      calculatePoints(playerPoints, computerPoints);
     }
   }
 }
-function game() {
-  let playerPoints = 0;
-  let computerPoints = 0;
-  for (let i = 0; i < 5; i++) {
-    let playerChoice = getPlayerChoice();
-    let computerChoice = getComputerChoice();
-    let result = playRound(playerChoice, computerChoice);
-    if (result == "It's a tie!") {
-      console.log(result);
-    } else if (result == "You win! Paper beats Rock") {
-      console.log(result);
-      playerPoints += 1;
-    } else if (result == "You win! Rock beats Scissors") {
-      console.log(result);
-      playerPoints += 1;
-    } else if (result == "You win! Scissors beats Paper") {
-      console.log(result);
-      playerPoints += 1;
-    } else if (result == "You lose! Paper beats Rock") {
-      console.log(result);
-      computerPoints += 1;
-    } else if (result == "You lose! Scissors beats Paper") {
-      console.log(result);
-      computerPoints += 1;
-    } else if (result == "You lose! Rock beats Scissors") {
-      console.log(result);
-      computerPoints += 1;
-    }
-  }
-  console.log(calculatePoints(playerPoints, computerPoints));
-}
+
 function calculatePoints(pP, cP) {
+  if (pP < 5 && cP < 5) {
+    return;
+  } else {
+    showMessage(pP, cP);
+  }
+}
+function showMessage(pP, cP) {
   let msg = "";
   if (pP > cP) {
     msg = `You win the game ${pP} to ${cP}!`;
@@ -74,6 +72,17 @@ function calculatePoints(pP, cP) {
   } else {
     msg = `You tie the game ${cP} to ${pP}!`;
   }
-  return msg;
+  const winner = document.createElement("h1");
+  winner.textContent = msg;
+  const col = document.getElementsByClassName("game");
+  for (let i = 0; i < col.length; i++) {
+    col[i].style.display = "none";
+  }
+  document.getElementById("fin").appendChild(winner);
 }
-game();
+const selectionButtons = document.querySelectorAll(".selection");
+selectionButtons.forEach((element) => {
+  element.addEventListener("click", () =>
+    playRound(element.textContent.toLowerCase(), getComputerChoice())
+  );
+});
