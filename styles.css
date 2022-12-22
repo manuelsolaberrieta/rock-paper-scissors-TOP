@@ -35,7 +35,7 @@
 }
 #result {
   padding: 10px;
-  font-size: 5vh;
+  font-size: 4vh;
   color: white;
 }
 #points {
@@ -48,6 +48,8 @@
 h3 {
   padding-top: 10%;
   padding-bottom: 0;
+  padding-left: 10%;
+  padding-right: 10%;
   color: aquamarine;
   font-size: 4vh;
   text-shadow: 2px 2px 2px darkslategray;
